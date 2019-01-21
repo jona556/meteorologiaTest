@@ -1,0 +1,55 @@
+<ion-header>
+   <ion-navbar>
+      <button ion-button menuToggle>
+         <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Home</ion-title>
+   </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+<ion-card>
+
+   <ion-card-header>
+   Elige tu localidad
+   </ion-card-header>
+
+   <ion-card-content>
+      <ion-list>
+         <ion-item>
+            <ion-select [(ngModel)]="continentsId" (ionChange)="onChangeContinents($event)">
+               <ion-option value="0">Selecciona un continente</ion-option>
+               <ion-option value="{{data.id}}" *ngFor="let data of continents" [innerHTML]="data.innerHTML"></ion-option>
+            </ion-select>
+         </ion-item>
+
+         <ion-item>
+            <ion-select [(ngModel)]="countryId" [disabled]="countrySearch" (ionChange)="onChangeCountry($event)">
+               <ion-option value="0">Selecciona un Pais</ion-option>
+               <ion-option value="{{data.id}}" *ngFor="let data of countries" [innerHTML]="data.innerHTML"></ion-option>
+            </ion-select>
+         </ion-item>
+
+         <ion-item>
+            <ion-select [(ngModel)]="regionId" [disabled]="regionSearch" (ionChange)="onChangeRegion($event)">
+               <ion-option value="0">Selecciona una Región</ion-option>
+               <ion-option value="{{data.id}}" *ngFor="let data of regions" [innerHTML]="data.innerHTML"></ion-option>
+            </ion-select>
+         </ion-item>
+
+         <ion-item>
+            <ion-select [(ngModel)]="locationId" [disabled]="locationSearch" (ionChange)="onChangeLocation($event)">
+               <ion-option value="0">Selecciona una Localidad</ion-option>
+               <ion-option value="{{data.id}}" *ngFor="let data of locations" [innerHTML]="data.innerHTML"></ion-option>
+            </ion-select>
+         </ion-item>
+      </ion-list>
+
+      <button class="weatherBtn" ion-button block (click)="goToWeather()" [disabled]="btnWeather">Ver el tiempo</button>
+      <button class="weatherBtn" ion-button block (click)="searchModal()">Buscar localidad</button>
+   </ion-card-content>
+
+</ion-card>
+
+   
+</ion-content>

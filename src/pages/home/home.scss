@@ -1,0 +1,30 @@
+page-home {
+	ion-content{
+		background-color: #e5e5e5 !important;
+	}
+
+	ion-card{
+		border-radius: 15px !important;
+		margin: 0px !important;
+		width: 100% !important;
+		height: 100% !important;
+
+		ion-select{
+			width: 100% !important;
+			max-width: 100% !important;
+			background: #2c3e50;
+			color: white;
+		}
+	}
+	ion-card-header{
+		text-align: center;
+	}
+
+	ion-item{
+		margin-top: 15px !important;
+	}
+
+	.weatherBtn{
+		margin-top: 25px;
+	}
+}

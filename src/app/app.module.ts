@@ -12,6 +12,7 @@ import { RequestProvider } from '../providers/request/request';
 
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { LoadingProvider } from '../providers/loading/loading';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { HttpClientModule } from '@angular/common/http';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    RequestProvider
+    RequestProvider,
+    LoadingProvider
   ]
 })
 export class AppModule {}

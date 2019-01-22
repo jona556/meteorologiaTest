@@ -58,6 +58,7 @@ export class HomePage {
 			console.log("getCountries:",data);
 			if(data.length > 0){
 				this.countries = data;
+				this.countrySearch = false;
 			}
 		})
 		.catch(err =>{
@@ -71,6 +72,7 @@ export class HomePage {
 			console.log("getRegions:",data);
 			if(data.length > 0){
 				this.regions = data;
+				this.regionSearch = false;
 			}
 		})
 		.catch(err =>{
@@ -81,13 +83,14 @@ export class HomePage {
 	getLocations(id){
 		this.reqProv.getLocationsReq(id)
 		.then((data:any) =>{
-			console.log("getRegions:",data);
+			console.log("getLocations:",data);
 			if(data.length > 0){
 				this.locations = data;
+				this.locationSearch = false;
 			}
 		})
 		.catch(err =>{
-			console.error("getRegions:",err);
+			console.error("getLocations:",err);
 		});
 	}
 
@@ -95,7 +98,6 @@ export class HomePage {
 		console.log(this.continentsId);
 		if(this.continentsId > 0){
 			this.getCountries(this.continentsId);
-			this.countrySearch = false;
 		}
 	}
 
@@ -103,7 +105,6 @@ export class HomePage {
 		console.log(this.countryId);
 		if(this.countryId > 0){
 			this.getRegions(this.countryId);
-			this.regionSearch = false;
 		}
 	}
 
@@ -111,7 +112,6 @@ export class HomePage {
 		console.log(this.regionId);
 		if(this.regionId > 0){
 			this.getLocations(this.regionId);
-			this.locationSearch = false;
 		}
 	}
 

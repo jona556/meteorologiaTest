@@ -1,23 +1,31 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { Http, Headers } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import * as xml2js from "xml2js";
+
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class RequestProvider {
 
-	constructor(public http: Http) {
+	constructor(public http: Http, public httpClient: HttpClient) {
 		console.log('Hello RequestProvider Provider');
 	}
 
 	getContinentsReq(){
-		var url = "http://api.meteored.cl/index.php?api_lang=cl&continente=0&affiliate_id=55nsxhsztu66";
+		// var url = "http://api.meteored.cl/index.php?api_lang=cl&continente=0&affiliate_id=55nsxhsztu66";
+		var url = "https://us-central1-meteorologia-7cfa7.cloudfunctions.net/getContinents?";
 
 		var headers = new Headers();
+		headers.append("Accept", 'application/json');
+      headers.append('Content-Type', 'application/json');
 		headers.append('Access-Control-Allow-Origin', '*');
-		headers.append('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+		// headers.append('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+		// headers.append('Accept','text/xml');
+		// headers.append('content-type','text/xml');
+		// headers.append("Postman-Token", "2af0d01b-fedd-4cdd-a261-2d3d9e05c525");
 
 		return new Promise((resolve, reject)=>
 		{
@@ -36,11 +44,13 @@ export class RequestProvider {
 	         console.error("Error in getContinentsReq:",error);
 	         reject(error);
 	      });
-		});
+
+ 		});
 	}
 
 	getCountriesReq(continentId){
-		var url = "http://api.meteored.cl/index.php?api_lang=cl&continente="+continentId+"&affiliate_id=55nsxhsztu66";
+		// var url = "http://api.meteored.cl/index.php?api_lang=cl&continente="+continentId+"&affiliate_id=55nsxhsztu66";
+		var url = "https://us-central1-meteorologia-7cfa7.cloudfunctions.net/getCountries?continentId="+continentId;
 
 		var headers = new Headers();
 		headers.append('Access-Control-Allow-Origin', '*');
@@ -67,7 +77,8 @@ export class RequestProvider {
 	}
 
 	getRegionsReq(countryId){
-		var url ="http://api.meteored.cl/index.php?api_lang=cl&pais="+countryId+"&affiliate_id=55nsxhsztu66";
+		// var url ="http://api.meteored.cl/index.php?api_lang=cl&pais="+countryId+"&affiliate_id=55nsxhsztu66";
+		var url = "https://us-central1-meteorologia-7cfa7.cloudfunctions.net/getRegions?countryId="+countryId;
 
 		var headers = new Headers();
 		headers.append('Access-Control-Allow-Origin', '*');
@@ -93,7 +104,8 @@ export class RequestProvider {
 	}
 
 	getLocationsReq(regionId){
-		var url ="http://api.meteored.cl/index.php?api_lang=cl&division="+regionId+"&affiliate_id=55nsxhsztu66";
+		// var url ="http://api.meteored.cl/index.php?api_lang=cl&division="+regionId+"&affiliate_id=55nsxhsztu66";
+		var url = "https://us-central1-meteorologia-7cfa7.cloudfunctions.net/getLocations?regionId="+regionId;
 
 		var headers = new Headers();
 		headers.append('Access-Control-Allow-Origin', '*');
@@ -119,7 +131,8 @@ export class RequestProvider {
 	}
 
 	getWeatherReq(locationID){
-		var url ="http://api.meteored.cl/index.php?api_lang=cl&localidad="+locationID+"&affiliate_id=55nsxhsztu66";
+		// var url ="http://api.meteored.cl/index.php?api_lang=cl&localidad="+locationID+"&affiliate_id=55nsxhsztu66";
+		var url = "https://us-central1-meteorologia-7cfa7.cloudfunctions.net/getWeather?locationID="+locationID;
 
 		var headers = new Headers();
 		headers.append('Access-Control-Allow-Origin', '*');
@@ -191,8 +204,9 @@ export class RequestProvider {
 	}
 
 	searchLocationsReq(locationName){
-		var url ="https://www.meteored.cl/peticionBuscador.php?lang=cl&texto="+locationName;
-
+		// var url ="https://www.meteored.cl/peticionBuscador.php?lang=cl&texto="+locationName;
+		var url = "https://us-central1-meteorologia-7cfa7.cloudfunctions.net/searchLocations?locationName="+locationName;
+		
 		var headers = new Headers();
 		headers.append('Access-Control-Allow-Origin', '*');
 		headers.append('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');

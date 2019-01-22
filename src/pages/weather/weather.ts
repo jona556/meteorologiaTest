@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { RequestProvider } from '../../providers/request/request';
+import { LoadingProvider } from '../../providers/loading/loading';
 
 @IonicPage()
 @Component({
@@ -17,7 +18,8 @@ export class WeatherPage {
 
 	weather:any=[];
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, public reqProv: RequestProvider)
+	constructor(public navCtrl: NavController, public navParams: NavParams, public reqProv: RequestProvider,
+		public loading: LoadingProvider)
 	{
 	}
 
@@ -27,15 +29,17 @@ export class WeatherPage {
 
 	ionViewDidEnter(){
 		var locationId = this.navParams.get("locationId");
-
+		this.loading.presentLoading("Cargando el tiempo");
 		this.reqProv.getWeatherReq(locationId)
 		.then(data =>{
 			console.log(data);
 			this.weather = data;
 			this.getDays();
+			this.loading.presentLoadingDismiss();
 		})
 		.catch(err =>{
 			console.error(err);
+			this.loading.presentLoadingDismiss();
 		});
 	}
 
